@@ -3,8 +3,13 @@
 
 
 
+* - Prevenir bloqueos del sistema
+sudo pacman -S --noconfirm earlyoom
+sudo systemctl enable earlyoom
+sudo systemctl start earlyoom
+sudo systemctl status earlyoom --no-pager
 
-
+echo 'EARLYOOM_ARGS="-m 5 -s 60 -k"' | sudo tee /etc/default/earlyoom  # Actuar cuando quede 5% RAM
 
 
 

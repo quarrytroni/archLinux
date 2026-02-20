@@ -1,0 +1,181 @@
+
+
+https://www.youtube.com/watch?v=PyUYbXZ8xx4
+
+1) Instalación kernel zen
+sudo pacman -S linux-zen linux-zen-headers
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+
+2) Instalación de drivers Nvidia
+Preguntar a IA:
+Para una GPU NVIDIA dedicada en Arch Linux con Wayland,
+la instalación es más compleja y requiere configuración post-instalación obligatoria.
+Explicame los comandos y pasos esenciales para una correcta instalación.
+
+
+3) Instalación de controladores de mesa AMD
+sudo pacman -S mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver vulkan-icd-loader lib32-vulkan-icd-loader vulkan-tools libva-utils radeontop
+
+paru -S vulkan-man-pages
+
+# Verificar VA-API
+vainfo
+
+# Verificar Vulkan (debe mostrar AMD RADV)
+vulkaninfo --summary
+
+# Verificar OpenGL
+glxinfo | grep "OpenGL renderer"  # Debe mostrar AMD RX 6600
+
+
+4) Instalación controladores mesa Intel:
+no usar los xf86-video-intel
+sudo pacman -S intel-media-driver mesa lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader intel-gpu-tools
+paru -S vulkan-man-pages
+
+# Verificar VA-API (aceleración de video)
+vainfo
+
+# Verificar Vulkan
+vulkaninfo --summary
+
+# Verificar OpenGL
+glxinfo | grep "OpenGL renderer"
+
+
+
+5) Mirar versión de Mesa instalada:
+glxinfo | grep "OpenGL version"
+
+
+6) Instalación de wine staging
+https://github.com/lutris/docs/blob/master/WineDependencies.md
+Colocar en la terminal los siguientes comandos:
+sudo pacman -Syu
+sudo pacman -S wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-
+libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils
+lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-
+plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-
+turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-
+libgcrypt libgcrypt lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader
+lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3
+gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-
+icd-loader
+
+
+
+
+7) Instalación de gamemode.
+GameMode es una herramienta diseñada para mejorar el rendimiento de los juegos en sistemas operativos Linux. Desarrollada por Feral Interactive, esta utilidad permite a los juegos solicitar un conjunto de optimizaciones que se aplican temporalmente al sistema operativo o al proceso del juego. A continuación, te presento una descripción más detallada de sus características y cómo utilizarlo.
+
+
+paru -S gamemode lib32-gamemode
+
+si queremos verificar que lo usa:
+gamemode-simulate
+
+
+
+
+8) Instalación de Gamescope.
+Gamescope es un microcompositor desarrollado por Valve, diseñado para proporcionar un entorno de compositor aislado optimizado para juegos. Es especialmente útil en sistemas como el Steam Deck, pero también se puede utilizar en otras distribuciones de Linux, incluyendo Arch Linux.
+Características Principales
+
+    Compositor Aislado: Permite ejecutar juegos en un entorno separado, lo que puede mejorar el rendimiento y la estabilidad.
+    Optimización para Juegos: Está diseñado específicamente para juegos, lo que significa que puede manejar mejor las demandas de rendimiento en comparación con otros compositores.
+    Soporte para Wayland: Gamescope puede funcionar sobre Wayland, lo que es beneficioso para los usuarios que buscan una experiencia más moderna y eficiente.
+
+
+sudo pacman -S gamescope
+
+gamescope -w 1920 -h 1080 -- supertuxkart
+
+-W y -H: Establecen la resolución utilizada por Gamescope.
+-w y -h: Establecen la resolución utilizada por el juego.
+--fullscreen: Ejecuta el juego en modo de pantalla completa.
+--expose-wayland
+--hdr-enabled
+
+
+hdr exige muchos recursos?
+
+
+
+
+ls /usr/bin | grep intel_gpu
+intel_gpu_abrt
+intel_gpu_frequency
+intel_gpu_time
+intel_gpu_top
+
+
+
+
+9) Instalación de mangohud.
+MangoHud es una herramienta de código abierto diseñada para mostrar información de rendimiento en juegos que utilizan Vulkan y OpenGL en sistemas operativos Linux. Permite a los jugadores visualizar métricas como la tasa de fotogramas por segundo (FPS), la carga de la CPU y la GPU, la temperatura y otros datos relevantes mientras juegan.
+
+paru -S mangohud lib32-mangohud
+
+para provar:
+
+mangohud glxgears
+mangohud vkcube
+
+mangohud gamemoderun glxgears
+mangohud gamemoderun vkcube
+
+
+
+
+10) Instalacion de GOverlay
+GOverlay es una herramienta de código abierto diseñada para facilitar la gestión de superposiciones en juegos de Linux, como MangoHud, vkBasalt y ReplaySorcery. Esta aplicación proporciona una interfaz gráfica que permite a los usuarios configurar estas herramientas sin necesidad de editar archivos de configuración manualmente.
+
+paru -S goverlay
+
+
+
+configurar desde el repositorio dotfiles
+
+
+
+vkBasalt es una capa de post-procesamiento para Vulkan que mejora los gráficos de los juegos mediante efectos visuales.
+Personalmente no lo voy ha instalar que de recursos andamos limitados.
+Características:
+
+    Efectos Visuales: Incluye efectos como el Contrast Adaptive Sharpening, Denoised Luma Sharpening, y Anti-Aliasing.
+    Compatibilidad: Funciona con juegos que utilizan Vulkan y es compatible con tarjetas gráficas NVIDIA y AMD.
+    Sin embargo, su compatibilidad con las gráficas Intel ha sido un tema de discusión, ya que algunos usuarios han reportado problemas al utilizar esta herramienta con sus tarjetas gráficas integradas.
+    Uso de Shaders: Permite la integración de shaders de Reshade para personalizar aún más la experiencia visual.
+
+vkBasalt instalación y configuración | Mejora gráfica
+https://www.youtube.com/watch?v=vWsQy7o2b64
+
+
+
+ReplaySorcery es una solución de grabación instantánea para Linux, similar a NVIDIA ShadowPlay.
+Características:
+Personalmente no lo voy ha instalar que de recursos andamos limitados.
+
+    Grabación Instantánea: Permite grabar los últimos 30 segundos de juego con un simple atajo de teclado.
+    Bajo Consumo de Recursos: Diseñado para funcionar sin consumir muchos recursos del sistema.
+    Integración con Steam: Se puede usar como un servicio de sistema para grabar juegos de Steam.
+
+
+
+# Daemon para monitorear y controlar la temperatura del sistema.
+paru -S thermald
+
+
+Instalamos antimicrox
+AntiMicroX es una herramienta gráfica que permite mapear controles de teclado y mouse a un gamepad, facilitando el uso de controladores en juegos o aplicaciones que no tienen soporte nativo para ellos. Esta aplicación es especialmente útil para jugadores que desean personalizar su experiencia de juego.
+
+paru -S antimicrox
+
+configurar desde el repositorio dotfiles
+
+
+
+
+
+

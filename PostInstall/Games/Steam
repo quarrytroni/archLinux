@@ -1,0 +1,12 @@
+Instalacion de steam
+sudo pacman -S steam
+
+Primero configurar
+Steam -> Parámetros -> Almacenamiento ->
+
+Para optimizar con gamemode
+administrar -> Propiedades -> Parámetros de lanzamiento ->
+gamemoderun %command%
+o
+
+gamemoderun MANGOHUD=1 %command%

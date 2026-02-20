@@ -40,7 +40,8 @@ if [ -n "$uuid" ]; then
     cat >> "$CRYPTTAB_FILE" << EOF
 
 # Mount root as /dev/mapper/cryptroot using LUKS, and prompt for the passphrase at boot time.
-cryptroot    UUID=$uuid    none    luks,discard,no-read-workqueue,no-write-workqueue,password-echo=no
+# No usar discard, baja la seguridad del disco, los SSD modernos tienen algoritmos de garbage collection que mitigan esto bastante bien.
+cryptroot    UUID=$uuid    none    luks,no-read-workqueue,no-write-workqueue,password-echo=no
 EOF
   echo "Añadido a $CRYPTTAB_FILE cryptroot"
 else

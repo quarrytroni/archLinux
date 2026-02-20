@@ -82,6 +82,8 @@ Me ha hecho windows otra partición de 700 MiB en este punto
 
 /dev/nvme0n1p4 -     4 GiB Extended boot loader          btrfs /boot
 
+Dicen que sigue dando problemas para el GRUB y siguen aconsejando ext4
+
 /dev/nvme0n1p5 -   400 GiB Linux root(x86-64)            btrfs /
 
 /dev/nvme0n1p6 -    40 GiB Microsoft basic data          exFAT
@@ -226,6 +228,12 @@ la formateamos con copia de seguridad
 
 mkfs.btrfs -L ArchRoot --data dup --metadata dup /dev/mapper/cryptroot
 
+Si vas a reinstalar, antes de crear el volumen LUKS, es ideal sobrescribir todo el disco/partición con datos aleatorios:
+sudo cryptsetup open --type plain -d /dev/urandom /dev/sdX tofill
+sudo dd if=/dev/zero of=/dev/mapper/tofill status=progress
+sudo cryptsetup close tofill
+Esto asegura que los bloques no usados parezcan aleatorios, no ceros, dificultando aún más el análisis forense.
+
 
 y el resto
 
@@ -262,6 +270,7 @@ no la vamos a montar para ello hemos creado la
 WINLINUX para intercambiar archivos entre los dos SOs
 
 
+Verificar opciones de montaje mas adelante, mirar el fstab
 
 
 
@@ -343,6 +352,59 @@ Verificar:
 # nano initfstab.sh
 # chmod +x initfstab.sh
 # ./initfstab.sh
+
+Verificar que:
+
+Evita ssd como opción: en versiones recientes del kernel (≥5.4),
+Btrfs detecta automáticamente SSDs y aplica optimizaciones.
+Añadir ssd manualmente ya no es necesario y puede incluso interferir.
+
+sudo systemctl enable fstrim.timer
+
+UUID=tu-uuid-aquí  /mnt/proyects  btrfs  defaults,noatime,compress=zstd,space_cache=v2,autodefrag  0  2
+
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/mapper/cryptroot LABEL=ArchRoot
+UUID=tu-uuid-aquí       /               btrfs           rw,relatime,space_cache=v2,subvol=/     0 0
+
+# /dev/nvme0n1p4 LABEL=ArchBoot
+UUID=tu-uuid-aquí       /boot           btrfs           rw,relatime,discard=async,space_cache=v2,subvol=/       0 0
+
+# /dev/sda4 LABEL=datos
+UUID=tu-uuid-aquí  /mnt/proyects  btrfs  defaults,noatime,compress=zstd,space_cache=v2,autodefrag  0  2
+
+
+Me aconsejan
+
+# / (raíz)
+UUID=...  /               btrfs  defaults,noatime,compress=zstd,space_cache=v2,subvol=/     0 1
+
+# /boot (¡considera cambiar a ext4!)
+UUID=...  /boot           btrfs  defaults,noatime,space_cache=v2,subvol=/,ro                0 2
+UUID=tu-uuid-de-boot  /boot  ext4  defaults,noatime,discard  0 2
+
+# /mnt/proyects (datos compartidos)
+UUID=...  /mnt/proyects   btrfs  defaults,noatime,compress=zstd,space_cache=v2,autodefrag  0 2
+
+
+
+compress=zstd: activa compresión transparente con el algoritmo Zstandard (muy eficiente en CPU y espacio). Puedes usar zstd:1 a zstd:15 para ajustar nivel (por defecto es ~3)
+
+
+No uses discard en Btrfs si planeas usar snapshots o subvolúmenes. Es mejor usar el servicio fstrim.timer para TRIM periódico:
+sudo systemctl enable fstrim.timer
+
+sudo systemctl status fstrim.timer
+[sudo] contraseña para c2mismo:
+○ fstrim.timer - Discard unused filesystem blocks once a week
+     Loaded: loaded (/usr/lib/systemd/system/fstrim.timer; disabled; preset: disabled)
+     Active: inactive (dead)
+    Trigger: n/a
+   Triggers: ● fstrim.service
+       Docs: man:fstrim
+
+systemd-boot
 
 
 

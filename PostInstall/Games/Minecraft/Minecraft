@@ -1,0 +1,168 @@
+Instalación de MINECRAFT
+
+paru -S prismlauncher
+
+Solo para poder añadir un usuario sin cuenta premium:
+Continuar sin cuenta en icono de cuenteas: Sin cuenta por defecto
+
+
+
+====================================
+AJUSTES
+====================================
+
+++++++++++++++++++++++++++++++++++++
+Launcher
+++++++++++++++++++++++++++++++++++++
+
+------------------------------------
+INTERFAZ DE USUARIO
+------------------------------------
+
+Por último lanzamiento -> OK
+
+
+
+++++++++++++++++++++++++++++++++++++
+MINECRAFT
+++++++++++++++++++++++++++++++++++++
+
+------------------------------------
+GENERAL
+------------------------------------
+
+Iniciar Minecraft maximizado
+
+------------------------------------
+AJUSTES
+------------------------------------
+
+Activar GameMode Feral -> OK
+
+Usa Zink -> OK
+
+
+
+++++++++++++++++++++++++++++++++++++
+JAVA
+++++++++++++++++++++++++++++++++++++
+
+------------------------------------
+GENERAL
+------------------------------------
+
+Asignación máxima de memoria -> 8192 MiB
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++
+INSTALAR
+++++++++++++++++++++++++++++++++++++
+
+Nueva instancia
+
+Nombre personalizado
+Grupo personalizado
+
+
+Filtrar por Lanzamiento prefuero la penúltima versión
+
+Loader mod -> Fabric
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++
+MODS
+++++++++++++++++++++++++++++++++++++
+
+al ejecutar saldra una ventanita de configuracion, cuando configure la ram
+añadirle la mayor memoria posible sin dejar el sistema sin memoria
+lo aconsejable son unos 6 GB
+
+ya en la aplicacion
+añadir instancia seleccionamos la version del minecraft y
+el mod loader Fabric
+
+pulsamos launch para que se descarge y se instale
+lo cerramos
+y pulsamos editar -> mods -> instalar mods
+
+Fabric API
+Sodium
+
+
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++
+SHADERS
+++++++++++++++++++++++++++++++++++++
+
+y si se quiere shaders
+Iris shaders
+
+
+pulsamos editar -> mods -> shaders packs
+Complementary Shaders Reimagined
+
+pulsamos editar -> mods -> resources packs -> abrir
+
+descargamos igual le podemos decir que lo descarge
+https://github.com/Poudingue/Vanilla-Normals-Renewed/releases/download/1.0.7/VNR-1.0.7.zip
+y selecionamos este archivo descargado
+
+opciones --> resurdes pack
+añadimos el VNR aunque nos diga incompatible
+
+opciones -> vcideo setting -> shaders pack
+selecciona
+ComplementaryReimagined_r5.1.1.zip
+Shade pack setting
+
+Creamos el archivo de configuracion de la textura:
+ComplementaryReimagined_r5.1.1.zip.txt
+
+Y añadimos:
+#Thu Dec 21 10:26:19 ART 2023
+LENSFLARE_I=0.20
+ATM_FOG_MULT=0.50
+FXAA=false
+ANISOTROPIC_FILTER=4
+WATER_STYLE_DEFINE=2
+RP_MODE=3
+LENSFLARE=true
+POM_DEPTH=0.25
+POM_DISTANCE=16
+BLOOM_STRENGTH=0.054
+POM_QUALITY=16
+
+en la aplicacion Shade pack setting
+importar y seleccionamos el archivo
+
+
+
+
+
+Resoluciones 16:9
+
+2560x1440 (actual)
+1920x1080
+1600x900
+1280x720
+854x480
+640x360
+

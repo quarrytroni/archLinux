@@ -1,0 +1,12 @@
+Instalación de lutris (No lo he instalado
+sudo pacman -S lutris
+
+
+Configuración de lutris:
+Luego buscar por enviroment variables y colocar lo siguiente:
+Key:
+__GL_SHADER_DISK_CACHE_SKIP_CLEANUP
+Value
+1
+En command prefix colocar:
+gamemoderun DXVK_HUD=60

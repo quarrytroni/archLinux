@@ -79,7 +79,7 @@ fi
 
 # OBSOLETO
 
-# install "libva-intel-drive"
+# install "libva-intel-drive", "mesa-vdpau"
 
 # Configuración solo para Xorg, para Wayland no realizar:
 

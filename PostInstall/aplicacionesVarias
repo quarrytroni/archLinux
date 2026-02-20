@@ -40,10 +40,24 @@ paru -S okteta
 
 
 
+paru -S arduino-avr-core
+
+paru -S arduino-ide
+CUIDADO:
+nodejs-lts-iron-20.19.5-3 y nodejs-25.2.0-1 están en conflicto.
+y usa electron
+y no se qué de vscode
 
 
 
+quizas mejor:
+paru -S arduino-ide-bin
+o
+sudo pacman -S arduino
 
+
+
+sudo usermod -a -G uucp,lock $USER
 
 
 

@@ -1,0 +1,27 @@
+
+Instalacion de Heroic Games
+
+paru -Syu
+paru -S wine-staging
+paru -S winetricks
+
+winecfg
+winetricks -q dxvk
+
+paru -S heroic-games-launcher-bin-wayland-hook
+
+los juegos se pueden configurar con:
+Habilitar Mangohud
+Usar GameMode
+
+
+
+si un juego de GOG, Amazon o Epic,
+por ejm. uno no se escuchava, prueba con
+Steam:
+Dejalo instalado en Heroic y ejecuta
+como aplicacion no de steam y elije
+forzar con protón, tambien puedes usar
+Configuración de steam
+en parametros de lanzamiento:
+gamemoderun %command%
