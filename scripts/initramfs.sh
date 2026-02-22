@@ -11,9 +11,10 @@ MKINITCPIO_CONF="/etc/mkinitcpio.conf"
 VCONSOLE_CONF="/etc/vconsole.conf"
 BACKUP_CONF="/etc/mkinitcpio.conf.backup"
 
-# Añadimos módulo i915 para Intel preguntar a IA por más
+# Añadimos módulo amdgpu para gráficos AMD
 MODULES_ORI="MODULES=()"
-MODULES_MOD="MODULES=(i915)"
+MODULES_MOD="MODULES=(amdgpu)"
+# MODULES_MOD="MODULES=(i915)"
 
 # Línea para comentar original
 HOOKS_MODULES_ORI="HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)"
@@ -23,18 +24,6 @@ HOOKS_MODULES_COMMENT="#    HOOKS=(base udev autodetect microcode modconf kms ke
 HOOKS_MODULES_ORI_COMMENT="#    HOOKS=(base systemd autodetect modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)"
 HOOKS_MODULES_UNCOMMENT_MOD="HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole sd-encrypt block filesystems fsck)"
 
-
-    # Verificar si la línea de HOOKS existe antes de modificarla
-    if grep -q "^$HOOKS_MODULES_ORI" "$MKINITCPIO_CONF"; then
-      # Comentar la línea de HOOKS original
-      sed -i "s|^$HOOKS_MODULES_ORI|$HOOKS_MODULES_COMMENT|" "$MKINITCPIO_CONF"
-      # Descomentar y modificar la línea de HOOKS para systemd
-      sed -i "s|^$HOOKS_MODULES_ORI_COMMENT|$HOOKS_MODULES_UNCOMMENT_MOD|" "$MKINITCPIO_CONF"
-      echo "La línea de HOOKS ha sido modificada en $MKINITCPIO_CONF."
-      flag=1
-    else
-      echo "Advertencia: La línea de HOOKS no se encontró en $MKINITCPIO_CONF."
-    fi
 # Hacer una copia de seguridad del archivo de configuración
 cp "$MKINITCPIO_CONF" "$BACKUP_CONF"
 
@@ -46,7 +35,7 @@ if [ -f "$VCONSOLE_CONF" ]; then
   if grep -q '^FONT=' "$VCONSOLE_CONF"; then
     # Verificar si la línea de MODULES existe antes de modificarla
     if grep -q "^$MODULES_ORI" "$MKINITCPIO_CONF"; then
-      # Modificar la línea de MODULES para procesadores Intel
+      # Modificar la línea de MODULES para procesadores AMD
       sed -i "s|^$MODULES_ORI|$MODULES_MOD|" "$MKINITCPIO_CONF"
       echo "La línea de MODULES ha sido modificada en $MKINITCPIO_CONF."
       flag=1
@@ -63,6 +52,7 @@ if [ -f "$VCONSOLE_CONF" ]; then
     else
       echo "Advertencia: La línea de HOOKS descomentada no se encontró en $MKINITCPIO_CONF."
     fi
+
     # Verificar si la línea de HOOKS comentada existe antes de modificarla
     if grep -q "^$HOOKS_MODULES_ORI_COMMENT" "$MKINITCPIO_CONF"; then
       # Descomentar y modificar la línea de HOOKS comentada para systemd
@@ -82,7 +72,7 @@ fi
 # Confirmar que se han realizado los cambios
 if [ $flag -eq 1 ]; then
   echo "Modificaciones realizadas en $MKINITCPIO_CONF:"
-  # Mostramos las lineas modificadas
+  # Mostramos las líneas modificadas
   grep '^MODULES=' "$MKINITCPIO_CONF"
   grep '^HOOKS=' "$MKINITCPIO_CONF"
   
@@ -99,3 +89,4 @@ fi
 # Limpiar los archivos temporales
 sudo rm -f "$0"
 exit 0
+
