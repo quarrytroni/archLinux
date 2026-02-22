@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Partición swap
-SWAP_PART="/dev/nvme0n1p8"
+SWAP_PART="/dev/nvme0n1p9"
 # Nombre del dispositivo desencriptado
 SWAP_CRYPT="volatileswap"
 # Ruta de los archivos en el sistema
