@@ -292,7 +292,7 @@ Verificar opciones de montaje mas adelante, mirar el fstab
 
 instalamos el sistema base en /mnt
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/initinstall.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initinstall.sh
 
 # chmod +x initinstall.sh
 # ./initinstall.sh
@@ -317,24 +317,14 @@ configuraciones básicas
 Configueramos teclados en español, sistema en ingles y
 usuarios en español
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/langConfig.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/langConfig.sh
 Verificar:
 # nano langConfig.sh
 # chmod +x langConfig.sh
 # ./langConfig.sh
 
 
-# paru -S man-pages man-db
-
-
-Desabilitamos la hibernación necesario si queremos tener instalados mas de un SOs
-
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/disable-sleep.sh
-Verificar:
-# nano disable-sleep.sh
-# chmod +x disable-sleep.sh
-# ./disable-sleep.sh
-
+# pacman -S man-pages man-db
 
 
 el grupo plugdev aún no existe
@@ -343,7 +333,7 @@ le otorgamos el passwd al root
 creará un usuario sin privilegios "visitante"
 creará un usuario con el nombre que indiquemos con privilegios superuser
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/createuser.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/createuser.sh
 Verificar:
 # nano createuser.sh
 # chmod +x createuser.sh
@@ -353,7 +343,12 @@ Verificar:
 
 
 Podemos comprobar si se han creado bién los usuarios
-su $USER
+sudo su quarrytroni
+cd ~
+ls -lh
+cd ..
+ls -lh
+sudo su
 sudo pacman -Sy
 este si es superadmin nos lo debe de permitir
 
@@ -362,7 +357,7 @@ este si es superadmin nos lo debe de permitir
 
 creamos el fstab despues de crear el usuario para añadir correctamente la partición WinLinux
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/initfstab.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initfstab.sh
 Verificar:
 # nano initfstab.sh
 # chmod +x initfstab.sh
@@ -426,7 +421,7 @@ systemd-boot
 
 añadimos windows al grub
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/addwindows.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/addwindows.sh
 Verificar:
 # nano addwindows.sh
 # chmod +x addwindows.sh
@@ -440,11 +435,11 @@ Configuramos para desencriptar el sistema de archivos raíz, ROOT (/),
 a traves del initramfs, en los proximos inicios
 
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/cryptroot.sh
+# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/uncryptDisk.sh
 Verificar:
-# nano cryptroot.sh
-# chmod +x cryptroot.sh
-# ./cryptroot.sh
+# nano uncryptDisk.sh
+# chmod +x uncryptDisk.sh
+# ./uncryptDisk.sh
 
 
 # wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/cryptswap.sh
@@ -686,6 +681,13 @@ GESTORES DE VENTANAS KDE
 kde mínimo pero plasma completo para mayor integridad y minimo un terminal y un explorador de archivos
 # paru -S plasma plasma-desktop kde-system kde-accessibility kwalletmanager kdialog khelpcenter partitionmanager dolphin dolphin-plugins kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
 
+Desabilitamos la hibernación necesario si queremos tener instalados mas de un SOs
+
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/disable-sleep.sh
+Verificar:
+# nano disable-sleep.sh
+# chmod +x disable-sleep.sh
+# ./disable-sleep.sh
 
 Tema SDDM:
 https://store.kde.org/s/KDE%20Store/p/2142845
