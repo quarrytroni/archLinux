@@ -78,19 +78,20 @@ particiones en disco 1TB
 
 /dev/nvme0n1p3 - 199.7 GiB Microsoft reserve partition   ntfs /mnt/windows msftdata
 
-Me ha hecho windows otra partición de 700 MiB en este punto
+#Me ha hecho windows otra partición de 700 MiB en este punto
+/dev/nvme0n1p4 - 777 MiB Microsoft recovery envoiroment
 
-/dev/nvme0n1p4 -     4 GiB Extended boot loader          btrfs /boot
+/dev/nvme0n1p5 -     4 GiB Extended boot loader          btrfs /boot
 
 Dicen que sigue dando problemas para el GRUB y siguen aconsejando ext4
 
-/dev/nvme0n1p5 -   400 GiB Linux root(x86-64)            btrfs /
+/dev/nvme0n1p6 -   300 GiB Linux root(x86-64)            btrfs /
 
-/dev/nvme0n1p6 -    40 GiB Microsoft basic data          exFAT
+/dev/nvme0n1p7 -    19 GiB Microsoft basic data          exFAT
 
-/dev/nvme0n1p7 - 299.5 GiB Linux reserved
+/dev/nvme0n1p8 -   401 GiB Linux filesystem                btrfs /mnt/DATOS
 
-/dev/nvme0n1p8 -    33 GiB Linux swap
+/dev/nvme0n1p9 -    30 GiB Linux swap
 
 
 
@@ -183,7 +184,7 @@ creamos el resto de particiones indicando sus tipos
 partición para boot este debe de excluirse de la encriptación,
 complica mucho la instalación y la recuperación del sistema.
 
-/dev/nvme0n1p4 -     4 GiB Extended boot loader          btrfs /boot
+/dev/nvme0n1p5 -     4 GiB Extended boot loader          btrfs /boot
 4096 MiB
 
 partición para el sistema en general, a causa de los dichosos
@@ -195,15 +196,18 @@ en una sola y beneficiarme de una mayor flexibilidad.
 Además tener en cuenta que el btrfs lo tengo en modo copia de seguridad (dup),
 no ocupan los datos el doble pero si ocupa bastante más.
 
-/dev/nvme0n1p5 -   400 GiB Linux root(x86-64)            btrfs /
+/dev/nvme0n1p6 -   300 GiB Linux root(x86-64)            btrfs /
 409600 MiB
 
 he asignado una pequeña partición para intercambio de datos y archivos
-entre linux y windows.
+entre linux y windows:
+
+/dev/nvme0n1p7 -    19 GiB Microsoft basic data exFAT
 
 
-/dev/nvme0n1p6 -    40 GiB Microsoft basic data exFAT
-40960 MiB
+/dev/nvme0n1p8 -    401 GiB Linux filesystem                btrfs /mnt/DATOS
+
+
 
 ¿32 GiB para SWAP? No no me he vuelto loco a pesar de tener 32 GiB de RAM,
 la he dejado al final del disco para modificarla con facilidad,
@@ -211,24 +215,34 @@ quiero testear y ver si puedo sacarle probecho, para tener
 una IA tipo Llama3 instalada en mi propio equipo, ya la he tenido
 y una 8b no ha ido demasiado mal :P
 
-/dev/nvme0n1p8 -    33 GiB Linux swap
+/dev/nvme0n1p9 -    29.6 GiB Linux swap
 
 
 
 encriptamos raiz
 
-cryptsetup luksFormat /dev/nvme0n1p5 --cipher aes-xts-plain64 --key-size 256 --hash sha512
+cryptsetup luksFormat /dev/nvme0n1p6 --cipher aes-xts-plain64 --key-size 256 --hash sha512
+para una clave de 32 caracteres ASCII máximo
+
+
+encriptamos DATOS
+
+cryptsetup luksFormat /dev/nvme0n1p8 --cipher aes-xts-plain64 --key-size 256 --hash sha512
 para una clave de 32 caracteres ASCII máximo
 
 la desencriptamos
 
-cryptsetup open /dev/nvme0n1p5 cryptroot
+cryptsetup open /dev/nvme0n1p6 cryptroot
+
+cryptsetup open /dev/nvme0n1p8 cryptdatos
 
 la formateamos con copia de seguridad
 
 mkfs.btrfs -L ArchRoot --data dup --metadata dup /dev/mapper/cryptroot
 
-Si vas a reinstalar, antes de crear el volumen LUKS, es ideal sobrescribir todo el disco/partición con datos aleatorios:
+mkfs.btrfs -L Datos --data dup --metadata dup /dev/mapper/cryptdatos
+
+Si vas a reinstalar, antes de crear el volumen LUKS(encriptados), es ideal sobrescribir todo el disco/partición con datos aleatorios:
 sudo cryptsetup open --type plain -d /dev/urandom /dev/sdX tofill
 sudo dd if=/dev/zero of=/dev/mapper/tofill status=progress
 sudo cryptsetup close tofill
@@ -237,29 +251,30 @@ Esto asegura que los bloques no usados parezcan aleatorios, no ceros, dificultan
 
 y el resto
 
-mkfs.btrfs -L ArchBoot --data dup --metadata dup /dev/nvme0n1p4
+mkfs.btrfs -L ArchBoot --data dup --metadata dup /dev/nvme0n1p5
 
 
 Para tener una partición de intercambio con cualquier SO's
-pacman -S exfatprogs
 
-mkfs.exfat -n "WINLINUX" -c 64K /dev/nvme0n1p6
+mkfs.exfat -n "WINLINUX" -c 64K /dev/nvme0n1p7
 
 
 La SWAP es una partición sin sistema de archivos (solo tipo Linux swap)
 Esto solo prepara la partición para swap, sin cifrado;
 luego se aplicará el cifrado con dm-crypt
 
-mkswap /dev/nvme0n1p8
+mkswap /dev/nvme0n1p9
 
 
 
 pacman -S wget
-
+si da error: "paquete no válido o dañado o error de firma PGP,
+normal en disco de arranque no actual:
+sudo pacman -S archlinux-keyring
 
 montamos todas las particiones necesarias para preinstalar el sistema
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/initmount.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initmount.sh
 Verificar:
 # nano initmount.sh
 # chmod +x initmount.sh
@@ -368,7 +383,7 @@ UUID=tu-uuid-aquí  /mnt/proyects  btrfs  defaults,noatime,compress=zstd,space_c
 # /dev/mapper/cryptroot LABEL=ArchRoot
 UUID=tu-uuid-aquí       /               btrfs           rw,relatime,space_cache=v2,subvol=/     0 0
 
-# /dev/nvme0n1p4 LABEL=ArchBoot
+# /dev/nvme0n1p5 LABEL=ArchBoot
 UUID=tu-uuid-aquí       /boot           btrfs           rw,relatime,discard=async,space_cache=v2,subvol=/       0 0
 
 # /dev/sda4 LABEL=datos
