@@ -435,14 +435,14 @@ Configuramos para desencriptar el sistema de archivos raíz, ROOT (/),
 a traves del initramfs, en los proximos inicios
 
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/uncryptDisk.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/uncryptDisk.sh
 Verificar:
 # nano uncryptDisk.sh
 # chmod +x uncryptDisk.sh
 # ./uncryptDisk.sh
 
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/cryptswap.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/cryptswap.sh
 Verificar:
 # nano cryptswap.sh
 # chmod +x cryptswap.sh
@@ -452,9 +452,9 @@ Verificar:
 
 VERIFICA
 Incluimos los modules del kernel necesarios para que initramfs pueda desencriptar
-usando systemd y sd-vconsole y añadimos el modulo para Intel
+usando systemd y sd-vconsole y añadimos el modulo para AMD
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/initramsf.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initramsf.sh
 Verificar:
 # nano initramsf.sh
 # chmod +x initramsf.sh
@@ -465,7 +465,7 @@ Verificar:
 
 Instalamos y configuramos grub para el arranque
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/grubInstall.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/grubInstall.sh
 Verificar:
 # nano grubInstall.sh
 # chmod +x grubInstall.sh
@@ -478,7 +478,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet snd_hda_intel.dmic_detect=0"
 
 O podemos hacer un script:
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/grubConfig.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/grubConfig.sh
 Verificar:
 # nano grubConfig.sh
 # chmod +x grubConfig.sh
@@ -504,7 +504,7 @@ adaptadores QLogic/QED, etc.). En tu lspci aparecen sólo dispositivos Intel, Mi
 sincronizamos relog &
 Instalamos gestor de RED NetworkManager con iwd que mejora la seguridad y la eficiencia
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/redConfig.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/redConfig.sh
 Verificar:
 # nano redConfig.sh
 # chmod +x redConfig.sh
@@ -515,7 +515,7 @@ Verificar:
 Preparamos para que el sistema no tenga problemas a la hora de montar
 particiones NTFS:
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/ntfs-3g.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/ntfs-3g.sh
 Verificar:
 # nano ntfs-3g.sh
 # chmod +x ntfs-3g.sh
