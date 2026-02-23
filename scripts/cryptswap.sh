@@ -56,7 +56,8 @@ cat >> "$FSTAB_FILE" << EOF
 /dev/mapper/$SWAP_CRYPT    none    swap    sw    0 0
 EOF
 
-echo -e "\n✅ Configuración de swap encriptada completado."
+update-initramfs -u && echo "initramfs actualizado correctamente" || echo "error initramfs no actualizado"
+
 
 # Limpiar los archivos temporales
 sudo rm -f "$0"
