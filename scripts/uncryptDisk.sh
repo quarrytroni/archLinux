@@ -62,6 +62,8 @@ else
     echo "No se pudo encontrar ambos UUIDs después de $max_attempts intentos."
 fi
 
+update-initramfs -u && echo "initramfs actualizado correctamente" || echo "error initramfs no actualizado"
+
 # Limpiar los archivos temporales
 sudo rm -f "$0"
 exit 0
