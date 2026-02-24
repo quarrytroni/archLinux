@@ -267,9 +267,9 @@ mkswap /dev/nvme0n1p9
 
 
 
-pacman -S wget
-si da error: "paquete no válido o dañado o error de firma PGP,
-normal en disco de arranque no actual:
+pacman -Sy wget
+#si da error: "paquete no válido o dañado o error de firma PGP,
+#normal en disco de arranque no actual:
 sudo pacman -S archlinux-keyring
 
 montamos todas las particiones necesarias para preinstalar el sistema
@@ -356,6 +356,10 @@ este si es superadmin nos lo debe de permitir
 
 
 creamos el fstab despues de crear el usuario para añadir correctamente la partición WinLinux
+cuidado estan cambiando el metodo de automontaje del sistema
+y el genfstab ahora parece que está en proceso de volverse obsoleto
+por el uso de systemd (systemd-gpt-auto-generator)
+en el paquete: arch-install-scripts se encuentra el genfstab
 
 # wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initfstab.sh
 Verificar:
