@@ -8,10 +8,12 @@ fi
 
 # Particiones
 ROOT_PART="/dev/nvme0n1p6"
-DATOS_PART="/dev/nvme0n1p8" # Cambia esto si la partición de datos es diferente
+DATOS_PART="/dev/nvme0n1p8"
 
-# Ruta del archivo a modificar
-CRYPTTAB_FILE="/etc/crypttab.initramfs"
+# Archivos de configuración
+CRYPTTAB_INITRAMFS="/etc/crypttab.initramfs"
+CRYPTTAB_FILE="/etc/crypttab"
+FSTAB_FILE="/etc/fstab"
 
 # Contador de intentos
 attempts=0
@@ -21,17 +23,17 @@ max_attempts=3
 get_uuid() {
     local part=$1
     local uuid=""
-    attempts=0
+    local tries=0
 
-    while [ $attempts -lt $max_attempts ]; do
+    while [ $tries -lt $max_attempts ]; do
         uuid=$(blkid -s UUID -o value "$part")
         
         if [ -n "$uuid" ]; then
             echo "$uuid"
             return 0
         else
-            echo "Intento $((attempts + 1)): No se encontró UUID para $part. Reintentando..."
-            attempts=$((attempts + 1))
+            echo "Intento $((tries + 1)): No se encontró UUID para $part. Reintentando..." >&2
+            tries=$((tries + 1))
             sleep 1
         fi
     done
@@ -44,25 +46,59 @@ get_uuid() {
 ROOT_UUID=$(get_uuid "$ROOT_PART")
 DATOS_UUID=$(get_uuid "$DATOS_PART")
 
-# Si se encontraron UUIDs, añadimos al archivo crypttab.initramfs
-if [ -n "$ROOT_UUID" ] && [ -n "$DATOS_UUID" ]; then
-    [ ! -e "$CRYPTTAB_FILE" ] && cp /etc/crypttab "$CRYPTTAB_FILE"
-    {
-        echo ""
-        echo "# Montar root como /dev/mapper/cryptroot usando LUKS."
-        echo "cryptroot    UUID=$ROOT_UUID    none    luks,no-read-workqueue,no-write-workqueue,password-echo=no"
-        
-        echo ""
-        echo "# Montar datos como /dev/mapper/cryptdatos usando LUKS."
-        echo "cryptdatos   UUID=$DATOS_UUID   none    luks,no-read-workqueue,no-write-workqueue,password-echo=no"
-    } >> "$CRYPTTAB_FILE"
-
-    echo "Añadido a $CRYPTTAB_FILE: cryptroot y cryptdatos"
-else
-    echo "No se pudo encontrar ambos UUIDs después de $max_attempts intentos."
+if [ -z "$ROOT_UUID" ] || [ -z "$DATOS_UUID" ]; then
+    echo "ERROR: No se pudo encontrar ambos UUIDs después de $max_attempts intentos."
+    exit 1
 fi
 
+echo "UUIDs encontrados:"
+echo "  ROOT:  $ROOT_UUID"
+echo "  DATOS: $DATOS_UUID"
 
-# Limpiar los archivos temporales
-sudo rm -f "$0"
+# ============================================
+# ROOT -> /etc/crypttab.initramfs (para arrancar)
+# ============================================
+[ ! -e "$CRYPTTAB_INITRAMFS" ] && [ -e "/etc/crypttab" ] && cp /etc/crypttab "$CRYPTTAB_INITRAMFS"
+
+cat >> "$CRYPTTAB_INITRAMFS" << EOF
+
+# Root encriptado - necesario para arrancar
+cryptroot    UUID=$ROOT_UUID    none    luks,no-read-workqueue,no-write-workqueue,password-echo=no
+EOF
+
+echo "✓ Añadido 'cryptroot' a $CRYPTTAB_INITRAMFS"
+
+# ============================================
+# DATOS -> /etc/crypttab normal (post-arranque)
+# ============================================
+cat >> "$CRYPTTAB_FILE" << EOF
+
+# Partición de datos encriptada
+cryptdatos   UUID=$DATOS_UUID   none    luks,no-read-workqueue,no-write-workqueue
+EOF
+
+echo "✓ Añadido 'cryptdatos' a $CRYPTTAB_FILE"
+
+# ============================================
+# Añadir DATOS al fstab
+# ============================================
+# Pregunta dónde montar DATOS
+read -p "¿Dónde quieres montar la partición DATOS? (ej: /mnt/datos): " MOUNT_POINT
+MOUNT_POINT=${MOUNT_POINT:-/mnt/datos}
+
+cat >> "$FSTAB_FILE" << EOF
+
+# Partición de datos encriptada
+/dev/mapper/cryptdatos    $MOUNT_POINT    ext4    defaults,noatime    0 2
+EOF
+
+echo "✓ Añadido 'cryptdatos' a $FSTAB_FILE (montado en $MOUNT_POINT)"
+
+echo ""
+echo "============================================"
+echo "Configuración completada. Recuerda:"
+echo "1. Regenerar initramfs: mkinitcpio -P"
+echo "2. Crear el punto de montaje: mkdir -p $MOUNT_POINT"
+echo "============================================"
+
 exit 0
