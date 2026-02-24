@@ -358,15 +358,15 @@ este si es superadmin nos lo debe de permitir
 creamos el fstab despues de crear el usuario para añadir correctamente la partición WinLinux
 cuidado estan cambiando el metodo de automontaje del sistema
 y el genfstab ahora parece que está en proceso de volverse obsoleto
-por el uso de systemd (systemd-gpt-auto-generator)
-en el paquete: arch-install-scripts se encuentra el genfstab
+por el uso de systemd (systemd-gpt-auto-generator o systemd-boot "alternativa del GRUB")
+en el paquete: arch-install-scripts se encuentra el genfstab instalado al inicio con pacstrap
 
 # wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initfstab.sh
 Verificar:
 # nano initfstab.sh
 # chmod +x initfstab.sh
 # ./initfstab.sh
-
+=================================================================================================
 Verificar que:
 
 Evita ssd como opción: en versiones recientes del kernel (≥5.4),
@@ -392,14 +392,14 @@ UUID=tu-uuid-aquí  /mnt/proyects  btrfs  defaults,noatime,compress=zstd,space_c
 Me aconsejan
 
 # / (raíz)
-UUID=...  /               btrfs  defaults,noatime,compress=zstd,space_cache=v2,subvol=/     0 1
+UUID=...  /               btrfs  defaults,noatime,compress=zstd,space_cache=v2,subvol=/     0 0
 
 # /boot (¡considera cambiar a ext4!)
-UUID=...  /boot           btrfs  defaults,noatime,space_cache=v2,subvol=/,ro                0 2
+UUID=...  /boot           btrfs  defaults,noatime,space_cache=v2,subvol=/,ro                0 0
 UUID=tu-uuid-de-boot  /boot  ext4  defaults,noatime,discard  0 2
 
 # /mnt/proyects (datos compartidos)
-UUID=...  /mnt/proyects   btrfs  defaults,noatime,compress=zstd,space_cache=v2,autodefrag  0 2
+UUID=...  /mnt/proyects   btrfs  defaults,noatime,compress=zstd,space_cache=v2,autodefrag  0 0
 
 
 
@@ -420,7 +420,7 @@ sudo systemctl status fstrim.timer
 
 systemd-boot
 
-
+==================================================================================================
 
 
 añadimos windows al grub
@@ -458,11 +458,11 @@ VERIFICA
 Incluimos los modules del kernel necesarios para que initramfs pueda desencriptar
 usando systemd y sd-vconsole y añadimos el modulo para AMD
 
-# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initramsf.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/initramfs.sh
 Verificar:
-# nano initramsf.sh
-# chmod +x initramsf.sh
-# ./initramsf.sh
+# nano initramfs.sh
+# chmod +x initramfs.sh
+# ./initramfs.sh
 
 
 
@@ -475,18 +475,18 @@ Verificar:
 # chmod +x grubInstall.sh
 # ./grubInstall.sh
 
-Tenemos que configurar el grub
+========================================================================================================
+Configurar el grub (solo para Intel)
 añadimos tambien: snd_hda_intel.dmic_detect=0 para que el sistema nos detecte correctamente
 la targeta de sonido HDA Intel PCH
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet snd_hda_intel.dmic_detect=0"
-
-O podemos hacer un script:
 
 # wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/grubConfig.sh
 Verificar:
 # nano grubConfig.sh
 # chmod +x grubConfig.sh
 # ./grubConfig.sh
+========================================================================================================
 
 
 
@@ -529,7 +529,7 @@ Verificar:
 
 
 reiniciamos para comprobar si el sistema arranca por si mismo
-todabia sin gestor de ventanas
+todavia sin gestor de ventanas
 
 $ exit
 repetir exit hasta salir de chroot
