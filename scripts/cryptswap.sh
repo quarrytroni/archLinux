@@ -45,6 +45,7 @@ done
 # Añadir al crypttab (USANDO UUID Y /dev/urandom)
 echo "Añadiendo a $CRYPTTAB_FILE..."
 cat >> "$CRYPTTAB_FILE" << EOF
+
 # Swap encriptada con clave aleatoria en cada arranque
 $SWAP_CRYPT    UUID=$SWAP_UUID    /dev/urandom    swap,cipher=aes-xts-plain64,keysize=256
 EOF
@@ -55,8 +56,6 @@ cat >> "$FSTAB_FILE" << EOF
 # Swap encriptada
 /dev/mapper/$SWAP_CRYPT    none    swap    sw    0 0
 EOF
-
-update-initramfs -u && echo "initramfs actualizado correctamente" || echo "error initramfs no actualizado"
 
 
 # Limpiar los archivos temporales
