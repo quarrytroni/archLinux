@@ -7,8 +7,8 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Particiones
-ROOT_PART="/dev/nvme0n1p5"
-DATOS_PART="/dev/nvme0n1p6" # Cambia esto si la partición de datos es diferente
+ROOT_PART="/dev/nvme0n1p6"
+DATOS_PART="/dev/nvme0n1p8" # Cambia esto si la partición de datos es diferente
 
 # Ruta del archivo a modificar
 CRYPTTAB_FILE="/etc/crypttab.initramfs"
