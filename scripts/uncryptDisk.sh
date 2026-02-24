@@ -13,7 +13,6 @@ DATOS_PART="/dev/nvme0n1p8"
 # Archivos de configuración
 CRYPTTAB_INITRAMFS="/etc/crypttab.initramfs"
 CRYPTTAB_FILE="/etc/crypttab"
-FSTAB_FILE="/etc/fstab"
 
 # Contador de intentos
 attempts=0
@@ -79,26 +78,11 @@ EOF
 
 echo "✓ Añadido 'cryptdatos' a $CRYPTTAB_FILE"
 
-# ============================================
-# Añadir DATOS al fstab
-# ============================================
-# Pregunta dónde montar DATOS
-read -p "¿Dónde quieres montar la partición DATOS? (ej: /mnt/datos): " MOUNT_POINT
-MOUNT_POINT=${MOUNT_POINT:-/mnt/datos}
-
-cat >> "$FSTAB_FILE" << EOF
-
-# Partición de datos encriptada
-/dev/mapper/cryptdatos    $MOUNT_POINT    ext4    defaults,noatime    0 2
-EOF
-
-echo "✓ Añadido 'cryptdatos' a $FSTAB_FILE (montado en $MOUNT_POINT)"
-
 echo ""
 echo "============================================"
 echo "Configuración completada. Recuerda:"
 echo "1. Regenerar initramfs: mkinitcpio -P"
-echo "2. Crear el punto de montaje: mkdir -p $MOUNT_POINT"
+echo "2. Crear el punto de montaje: mkdir -p /mnt/DATOS"
 echo "============================================"
 
 exit 0
