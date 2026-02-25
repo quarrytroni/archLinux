@@ -655,7 +655,10 @@ oficiales
 
 
 
-Cuidado descargar y ejecutar en /usr/local/bin:
+!!! Cuidado descargar y ejecutar en /usr/local/bin: ¡¡¡
+       
+      " -P /usr/local/bin "
+      "                   "
 # wget -P /usr/local/bin https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/paruInstallConf.sh
 Verificar:
 # nano /usr/local/bin/paruInstallConf.sh
@@ -692,6 +695,7 @@ GESTORES DE VENTANAS KDE
 
 
 kde mínimo pero plasma completo para mayor integridad y minimo un terminal y un explorador de archivos
+
 # paru -S plasma plasma-desktop kde-system kde-accessibility kwalletmanager kdialog khelpcenter partitionmanager dolphin dolphin-plugins kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
 
 Desabilitamos la hibernación necesario si queremos tener instalados mas de un SOs
