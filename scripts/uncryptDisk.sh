@@ -85,4 +85,6 @@ echo "1. Regenerar initramfs: mkinitcpio -P"
 echo "2. Crear el punto de montaje: mkdir -p /mnt/DATOS"
 echo "============================================"
 
+# Limpiar los archivos temporales
+sudo rm -f "$0"
 exit 0
