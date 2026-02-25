@@ -324,7 +324,6 @@ Verificar:
 # ./langConfig.sh
 
 
-# pacman -S man-pages man-db
 
 
 el grupo plugdev aún no existe
