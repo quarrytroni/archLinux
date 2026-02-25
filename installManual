@@ -559,8 +559,10 @@ verificando
 $ lspci -k | less
 
 # dmesg | grep usbcore
+ por nucelo intel
 # dmesg | grep i915
-
+ por nucleo AMD
+# dmesg | grep AMD
 swapon --show
 
 verificamos que los discos se hayan montado correctamente
@@ -593,14 +595,22 @@ $ journalctl -b | grep cryptsetup
 
 
 
-
+================================= para intel ===================================================
 $ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/install_i9.sh
 Verificar:
 # nano install_i9.sh
 chmod +x install_i9.sh
 ./install_i9.sh
+==============================================================================================
 
 
+================================= para AMD  ===================================================
+$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/installAMD.sh
+Verificar:
+# nano installAMD.sh
+chmod +x installAMD.sh
+./installAMD.sh
+===============================================================================================
 Instalando los servicios de bluetooth
 # wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/btInstall.sh
 Verificar:
