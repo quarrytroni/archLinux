@@ -7,9 +7,19 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 
+# === Configurar parámetro de arrenque de root en GRUB ===
+sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="root=/dev/mapper/cryptroot"/' /etc/default/grub
+
+
 # === MEJORA AQUÍ: Configurar parámetro de sonido en GRUB ===
-echo "Configurando parámetros de kernel para HDA Intel PCH..."
-sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet snd_hda_intel.dmic_detect=0"/' /etc/default/grub
+# echo "Configurando parámetros de kernel para HDA Intel PCH..."
+# sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet snd_hda_intel.dmic_detect=0"/' /etc/default/grub
+
+# === MEJORA AQUÍ: Configurar parámetro del GRUB sin HDA Intel PCH ===
+echo "Configurando parámetros del grub"
+sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/' /etc/default/grub
+
+
 
 # Verificar si la modificación fue exitosa
 if [ $? -ne 0 ]; then
