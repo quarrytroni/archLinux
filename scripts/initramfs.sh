@@ -17,11 +17,11 @@ MODULES_MOD="MODULES=(amdgpu)"
 # MODULES_MOD="MODULES=(i915)"
 
 # Línea para comentar original
-HOOKS_MODULES_ORI="HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)"
-HOOKS_MODULES_COMMENT="#    HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)"
+HOOKS_MODULES_ORI="HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole block filesystems fsck)"
+HOOKS_MODULES_COMMENT="#    HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole block filesystems fsck)"
 
 # Línea para descomentar y modificar para systemd original
-HOOKS_MODULES_ORI_COMMENT="#    HOOKS=(base systemd autodetect modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)"
+HOOKS_MODULES_ORI_COMMENT="#    HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)"
 HOOKS_MODULES_UNCOMMENT_MOD="HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole sd-encrypt block filesystems fsck)"
 
 # Hacer una copia de seguridad del archivo de configuración
