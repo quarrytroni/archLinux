@@ -72,5 +72,17 @@ echo "[ -f ~/.config/vconsole.conf ] && . ~/.config/vconsole.conf" >> /etc/skel/
 
 echo "Idioma para los usuarios configurado en español completado."
 
+# Instalación de los manuales
+install() {
+    local option="$1"
+    if ! pacman -Qi $option > /dev/null 2>&1; then
+    sudo pacman -S --noconfirm $option
+  fi
+}
+
+install "man-pages"
+install "man-db"
+echo "Instalado los manuales"
+
 sudo rm -f "$0"
 exit 0
