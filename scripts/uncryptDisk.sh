@@ -73,7 +73,7 @@ echo "✓ Añadido 'cryptroot' a $CRYPTTAB_INITRAMFS"
 cat >> "$CRYPTTAB_FILE" << EOF
 
 # Partición de datos encriptada
-cryptdatos   UUID=$DATOS_UUID   none    luks,no-read-workqueue,no-write-workqueue
+cryptdatos   UUID=$DATOS_UUID   none    luks,no-read-workqueue,no-write-workqueue,password-echo=no
 EOF
 
 echo "✓ Añadido 'cryptdatos' a $CRYPTTAB_FILE"
