@@ -65,7 +65,8 @@ cat >> "$CRYPTTAB_INITRAMFS" << EOF
 cryptroot    UUID=$ROOT_UUID    none    luks,no-read-workqueue,no-write-workqueue,password-echo=no
 EOF
 
-echo "✓ Añadido 'cryptroot' a $CRYPTTAB_INITRAMFS"
+echo
+echo "Añadido 'cryptroot' a $CRYPTTAB_INITRAMFS"
 
 # ============================================
 # DATOS -> /etc/crypttab normal (post-arranque)
@@ -76,7 +77,7 @@ cat >> "$CRYPTTAB_FILE" << EOF
 cryptdatos   UUID=$DATOS_UUID   none    luks,no-read-workqueue,no-write-workqueue,password-echo=no
 EOF
 
-echo "✓ Añadido 'cryptdatos' a $CRYPTTAB_FILE"
+echo "Añadido 'cryptdatos' a $CRYPTTAB_FILE"
 
 echo ""
 echo "============================================"
