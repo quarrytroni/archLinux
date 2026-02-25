@@ -44,7 +44,7 @@ echo "Añadiendo a $CRYPTTAB_FILE..."
 cat >> "$CRYPTTAB_FILE" << EOF
 
 # Swap encriptada con clave aleatoria en cada arranque
- $SWAP_CRYPT    UUID=$SWAP_UUID    /dev/urandom    swap,cipher=aes-xts-plain64,keysize=256
+ $SWAP_CRYPT    UUID=$SWAP_UUID    /dev/urandom    swap,cipher=aes-xts-plain64,size=256
 EOF
 
 echo "✓ Añadido '$SWAP_CRYPT' a $CRYPTTAB_FILE"
