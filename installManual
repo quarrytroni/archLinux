@@ -319,7 +319,7 @@ accedemos a el
 
 configuraciones básicas
 
-
+cd /tmp
 
 Configueramos teclados en español, sistema en ingles y
 usuarios en español
@@ -416,7 +416,7 @@ No uses discard en Btrfs si planeas usar snapshots o subvolúmenes. Es mejor usa
 sudo systemctl enable fstrim.timer
 
 sudo systemctl status fstrim.timer
-[sudo] contraseña para c2mismo:
+[sudo] contraseña para usuario:
 ○ fstrim.timer - Discard unused filesystem blocks once a week
      Loaded: loaded (/usr/lib/systemd/system/fstrim.timer; disabled; preset: disabled)
      Active: inactive (dead)
@@ -481,12 +481,24 @@ Verificar:
 # chmod +x grubInstall.sh
 # ./grubInstall.sh
 
+
+
+revisar:
+https://wiki.archlinux.org/title/Microcode
+2.1.3.1 GRUB
+
 ========================================================================================================
 Configurar el grub (solo para Intel)
 añadimos tambien: snd_hda_intel.dmic_detect=0 para que el sistema nos detecte correctamente
 la targeta de sonido HDA Intel PCH
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet snd_hda_intel.dmic_detect=0"
-
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/grubConfig.sh
+Verificar:
+# nano grubConfig.sh
+# chmod +x grubConfig.sh
+# ./grubConfig.sh
+=======================================================================================================
+Configurar el grub (solo para AMD)
 # wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/grubConfig.sh
 Verificar:
 # nano grubConfig.sh
@@ -590,53 +602,6 @@ $ journalctl -b | grep cryptsetup
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-================================= para intel ===================================================
-$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/install_i9.sh
-Verificar:
-# nano install_i9.sh
-chmod +x install_i9.sh
-./install_i9.sh
-==============================================================================================
-
-
-================================= para AMD  ===================================================
-$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/installAMD.sh
-Verificar:
-# nano installAMD.sh
-chmod +x installAMD.sh
-./installAMD.sh
-===============================================================================================
-Instalando los servicios de bluetooth
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/btInstall.sh
-Verificar:
-# nano btInstall.sh
-# chmod +x btInstall.sh
-# ./btInstall.sh
-
-verificar:
-# systemctl status bluetooth.service
-
-En la última instalación no se "enable" correctamente.
-
-
-
-***********
-
-
-
-
 configuramos pacman y añadimos los repositorios
 # wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/pacmanConf.sh
 Verificar:
@@ -675,6 +640,84 @@ Verificar:
 
 
 
+
+
+
+
+
+
+
+
+
+
+================================= para intel ===================================================
+$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/install_i9.sh
+Verificar:
+# nano install_i9.sh
+chmod +x install_i9.sh
+./install_i9.sh
+==============================================================================================
+
+
+================================= para AMD  ===================================================
+$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/installAMD.sh
+Verificar:
+# nano installAMD.sh
+chmod +x installAMD.sh
+./installAMD.sh
+===============================================================================================
+
+
+
+
+
+
+da instalar con paru uno a uno
+
+install "lib32-mesa"
+
+
+install "lib32-vulkan-radeon"
+
+install "lib32-vulkan-icd-loader"
+
+
+install "xf86-video-amdgpu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Instalando los servicios de bluetooth
+# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/btInstall.sh
+Verificar:
+# nano btInstall.sh
+# chmod +x btInstall.sh
+# ./btInstall.sh
+
+verificar:
+# systemctl status bluetooth.service
+
+En la última instalación no se "enable" correctamente.
+
+
+
+***********
+
+
+
+
+
+
 VERIFICAR las configuraciones de usuario
 Instalamos el servidor de AUDIO pipewire
 # wget -P /usr/local/bin https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/soundServer.sh
@@ -703,7 +746,7 @@ GESTORES DE VENTANAS KDE
 
 kde mínimo pero plasma completo para mayor integridad y minimo un terminal y un explorador de archivos
 
-# paru -S plasma plasma-desktop kde-system kde-accessibility kwalletmanager kdialog khelpcenter partitionmanager dolphin dolphin-plugins kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
+# paru -S plasma kde-system kde-accessibility kwalletmanager kdialog dolphin-plugins kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
 
 Desabilitamos la hibernación necesario si queremos tener instalados mas de un SOs
 
@@ -779,7 +822,7 @@ Verificar:
 Configurar Nerd Fonts en tu terminal (kitty)
 fc-list | grep -i "nerd"
 
-~/.config/kitty/kitty.conf
+
 nano ~/.config/kitty/kitty.conf
 
 font_family      FiraCode Nerd Font
