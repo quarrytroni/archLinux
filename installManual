@@ -756,6 +756,9 @@ Verificar:
 # chmod +x disable-sleep.sh
 # ./disable-sleep.sh
 
+# systemctl enable sddm
+
+
 Tema SDDM:
 noir-SDDM
 https://store.kde.org/s/KDE%20Store/p/2142845
@@ -780,12 +783,6 @@ Current=C64-AnimTimeCrystal
 
 
 
-no hay que activar sddm.service
-a partir de plasma 6.6 se usa el fork SDDM "Plasma Login Manager"
-
-# cat /etc/passwd | grep sddm
-aconsejan eliminar usuario SDDM
-# userdel -r sddm 
 
 
 fuentes:
