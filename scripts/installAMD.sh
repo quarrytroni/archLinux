@@ -27,12 +27,9 @@ install "cpupower"
 # GPU
 
 install "mesa"
-install "lib32-mesa"
 install "vulkan-radeon"
-install "lib32-vulkan-radeon"
 install "vulkan-tools"
 install "vulkan-icd-loader"
-install "lib32-vulkan-icd-loader"
 
 herramiente par monitorizar sensores
 install "zenmonitor"
@@ -40,11 +37,11 @@ install "zenmonitor"
 # Para monitorear el rendimiento de tu GPU AMD en Wayland
 install "radeon-profile"
 
+# thermald: herramienta es específica y casi exclusiva para CPUs Intel.
 # Daemon para monitorear y controlar la temperatura del sistema.
 # install "thermald"
-# thermald: Esta herramienta es específica y casi exclusiva para CPUs Intel.
-  Para AMD, la gestión térmica se controla mejor desde el kernel 
-  o mediante auto-cpufreq 
+
+
 # Verificar y habilitar thermald.service
 if systemctl --user is-active --quiet thermald.service > /dev/null 2>&1; then
     echo "thermald.service ya está activo."
