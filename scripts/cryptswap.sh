@@ -44,10 +44,12 @@ echo "Añadiendo a $CRYPTTAB_FILE..."
 cat >> "$CRYPTTAB_FILE" << EOF
 
 # Swap encriptada con clave aleatoria en cada arranque
-$SWAP_CRYPT    UUID=$SWAP_UUID    /dev/urandom    swap,cipher=aes-xts-plain64,size=256
+# $SWAP_CRYPT    UUID=$SWAP_UUID    /dev/urandom    swap,cipher=aes-xts-plain64,size=256
+# font archLinux
+$SWAP_CRYPT    UUID=$SWAP_UUID    /dev/urandom    swap,cipher=aes-xts-plain64,size=512,sector-size=4096
 EOF
 
-echo "✓ Añadido '$SWAP_CRYPT' a $CRYPTTAB_FILE"
+echo "Añadido '$SWAP_CRYPT' a $CRYPTTAB_FILE"
 
 # Añadir al fstab
 echo "Añadiendo a $FSTAB_FILE..."
@@ -57,7 +59,7 @@ cat >> "$FSTAB_FILE" << EOF
 /dev/mapper/$SWAP_CRYPT    none    swap    sw    0 0
 EOF
 
-echo "✓ Añadido '$SWAP_CRYPT' a $FSTAB_FILE"
+echo "Añadido '$SWAP_CRYPT' a $FSTAB_FILE"
 
 echo ""
 echo "============================================"
