@@ -9,7 +9,7 @@ fi
 
 # === Configurar parámetro de arrenque de root en GRUB ===
 echo "Añadiendo cryptroot"
-sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="root=/dev/mapper/cryptroot"/' /etc/default/grub && \
+sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="root=\/dev\/mapper\/cryptroot"/' /etc/default/grub && \
 echo "cryptroot añadirdo correctamente" || \
 echo "ERROR: No se ha podido añadir cryptroot a la configuración del grub"
 
