@@ -56,7 +56,8 @@ echo "Añadiendo a $FSTAB_FILE..."
 cat >> "$FSTAB_FILE" << EOF
 
 # Swap encriptada
-/dev/mapper/$SWAP_CRYPT    none    swap    sw    0 0
+# /dev/mapper/$SWAP_CRYPT    none    swap    sw    0 0
+/dev/mapper/$SWAP_CRYPT    none    swap    defaults    0 0
 EOF
 
 echo "Añadido '$SWAP_CRYPT' a $FSTAB_FILE"
