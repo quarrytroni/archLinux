@@ -258,6 +258,13 @@ Para tener una partición de intercambio con cualquier SO's
 
 mkfs.exfat -n "WINLINUX" -c 64K /dev/nvme0n1p7
 
+para asegurar la persistencia del UUID es necesario crear
+una pequeña particion "bogus filesystem" de 1M
+para que al al hora de encriptar le particion hacerlo con offset
+con este metodo se respeta el encabezado de la particion en cada reinicio,nuncaborror/cambiar 
+este falso "bogus" sistema de archivo
+
+# mkfs.ext2 -L swapOnlyHeader /dev/nvme0n1p9 1M
 
 La SWAP es una partición sin sistema de archivos (solo tipo Linux swap)
 Esto solo prepara la partición para swap, sin cifrado;
@@ -656,7 +663,7 @@ oficiales
 
 
 !!! Cuidado descargar y ejecutar en /usr/local/bin: ¡¡¡
-       
+      "                   "
       " -P /usr/local/bin "
       "                   "
 # wget -P /usr/local/bin https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/paruInstallConf.sh
@@ -707,11 +714,17 @@ Verificar:
 # ./disable-sleep.sh
 
 Tema SDDM:
+noir-SDDM
 https://store.kde.org/s/KDE%20Store/p/2142845
+or
+animTimeCrystal old school theme
+https://store.kde.org/s/KDE%20Store/p/2131156
 
 Descomprimir
 
 # mkdir /usr/share/sddm/themes/Noir-SDDM-6
+or
+# mkdir /usr/share/sddm/themes/C64-AnimTimeCrystal
 
 
 # nano /usr/lib/sddm/sddm.conf.d/default.conf
@@ -719,11 +732,17 @@ Descomprimir
 NumLock=on
 [Theme]
 Current=Noir-SDDM-6
+or
+Current=C64-AnimTimeCrystal
 
 
 
+no hay que activar sddm.service
+a partir de plasma 6.6 se usa el fork SDDM "Plasma Login Manager"
 
-# sudo systemctl enable sddm.service
+# cat /etc/passwd | grep sddm
+aconsejan eliminar usuario SDDM
+# userdel -r sddm 
 
 
 fuentes:
