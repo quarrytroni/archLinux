@@ -843,12 +843,10 @@ Ctrl+Shift+F5
 Aplicaciones básicas:
 # paru -S firefox kmix filelight kalgebra kompare kolourpaint kget ktorrent isoimagewriter p7zip unrar lzip zip unzip
 
-Para compatibilidad con Dolphin, para MTP con teléfonos móviles
-# paru -S libmtp kio-admin kio-extras
 
 Instalador gráfico de aplicaciones, es el mas oficial y usa flatpak,
 seguramente instalado prefiero evitar los flatpak, ocupan demasiado:
-paru -S discover packagekit packagekit-qt5 appstream appstream-qt
+paru -S discover packagekit appstream appstream-qt
 
 Instalador gráfico de aplicaciones, parecido a Synaptic de ubuntu
 paru -S octopi
@@ -893,7 +891,9 @@ kde-applications-meta kde-network-meta kde-utilities-meta
 nos aseguramos que el sistema no haga hibernación
 
 deshabilitar la hibernacion:
-cp /etc/systemd/logind.conf /etc/systemd/logind.conf.backup
+# cp /etc/systemd/logind.conf /etc/systemd/logind.conf.backup
+
+
 sudo nano /etc/systemd/logind.conf
 
 #HandlePowerKey=ignore
@@ -920,9 +920,10 @@ HandleSuspendKeyLongPress=ignore
 por
 HibernateKeyIgnoreInhibited=no
 
+problema al ejecutar esto:
 sudo systemctl restart systemd-logind
 
-
+systemclt reboot
 
 
 
