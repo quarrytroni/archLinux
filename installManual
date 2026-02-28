@@ -841,30 +841,6 @@ Ctrl+Shift+F5
 
 
 
-Aplicaciones básicas:
-# paru -S firefox kmix filelight kalgebra kompare kolourpaint kget ktorrent isoimagewriter p7zip unrar lzip zip unzip
-
-
-Instalador gráfico de aplicaciones, es el mas oficial y usa flatpak,
-seguramente instalado prefiero evitar los flatpak, ocupan demasiado:
-paru -S discover packagekit appstream appstream-qt
-
-Instalador gráfico de aplicaciones, parecido a Synaptic de ubuntu
-paru -S octopi
-
-paru -S jdk-openjdk
-
-paru -S python python-pip
-
-gestion de video
-paru -S ffmpeg libde265 libheif vlc libdvdcss gst-plugins-ugly gst-plugins-bad
-
-
-
-
-
-
-
 
 
 
