@@ -710,9 +710,10 @@ verificar:
 En la última instalación no se "enable" correctamente.
 
 
-
-***********
-
+no intsalla correctamente los codec:
+SBC/SBC-XQ, AptX
+info:
+https://wiki.archlinux.org/title/Bluetooth_headset
 
 
 
