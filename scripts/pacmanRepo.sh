@@ -20,6 +20,8 @@ sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 # Arch Linux proporciona una herramienta llamada reflector que puede ayudarte a clasificar los espejos por velocidad.
 sudo reflector --country 'Spain,Portugal,France,Germany,Switzerland' --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
 
+systemctl enable reflector.timer
+
 # Sincronizar la base de datos de pacman
 sudo pacman -Syy
 
