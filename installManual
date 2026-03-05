@@ -112,7 +112,7 @@ Nueva la primera 250 MiB como Tipo EFI System
 Write y Exit
 
 Formateamos
-mkfs.fat -F32 -n EFI System /dev/nvme0n1p1
+mkfs.fat -F32 -n EFI /dev/nvme0n1p1
 
 Salimos de la instalación
 reboot
@@ -121,6 +121,15 @@ instalamos windows
 
 Nueva partición 204800 MiB
 
+CUIDADO estar pendiente cuando reinicie de quitar el pendrive,
+que no te pide quitarlo y querrá instalarlo más veces
+el momento es a unos 77%
+
+si no lo consigues vuelve a eliminar todas las particiones con
+cfdisk /dev/nvme0n1
+crea una temporal de 200G y formateas con
+mkfs.exfat /dev/nvme0n1p1
+y vuelve a crear la EFI como anteriormente
 
 
 Continuamos con Arch
