@@ -747,7 +747,7 @@ GESTORES DE VENTANAS KDE
 
 kde mínimo pero plasma completo para mayor integridad y minimo un terminal y un explorador de archivos
 
-# paru -S plasma kde-system kde-accessibility kwalletmanager kdialog dolphin-plugins kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
+# paru -S plasma kde-system kde-accessibility kwalletmanager kdialog dolphin-plugins kcalc kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
 
 Desabilitamos la hibernación necesario si queremos tener instalados mas de un SOs
 

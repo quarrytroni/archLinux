@@ -53,21 +53,28 @@ glxinfo | grep "OpenGL version"
 https://github.com/lutris/docs/blob/master/WineDependencies.md
 Colocar en la terminal los siguientes comandos:
 sudo pacman -Syu
-sudo pacman -S wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-
-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils
-lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-
-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-
-turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-
-libgcrypt libgcrypt lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader
-lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3
-gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-
-icd-loader
+sudo pacman -S wine-staging
+ Wine-staging si:
+
+     Quieres jugar juegos de Windows
+     Necesitas soporte para DirectX más reciente
+     Quieres las últimas mejoras de rendimiento
+     No te importa algún bug ocasional
+
+
+
+
+
+extras para el Wine
+
+
+paru -S giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
 
 
 
 
 7) Instalación de gamemode.
-GameMode es una herramienta diseñada para mejorar el rendimiento de los juegos en sistemas operativos Linux. Desarrollada por Feral Interactive, esta utilidad permite a los juegos solicitar un conjunto de optimizaciones que se aplican temporalmente al sistema operativo o al proceso del juego. A continuación, te presento una descripción más detallada de sus características y cómo utilizarlo.
+GameMode es una herramienta diseñada para mejorar el rendimiento de los juegos en sistemas operativos Linux. Desarrollada por Feral Interactive, esta utilidad permite a los juegos solicitar un conjunto de optimizaciones que se aplican temporalmente al sistema operativo o al proceso del juego.
 
 
 paru -S gamemode lib32-gamemode
@@ -87,7 +94,7 @@ Características Principales
     Soporte para Wayland: Gamescope puede funcionar sobre Wayland, lo que es beneficioso para los usuarios que buscan una experiencia más moderna y eficiente.
 
 
-sudo pacman -S gamescope
+paru -S gamescope
 
 gamescope -w 1920 -h 1080 -- supertuxkart
 
@@ -99,15 +106,6 @@ gamescope -w 1920 -h 1080 -- supertuxkart
 
 
 hdr exige muchos recursos?
-
-
-
-
-ls /usr/bin | grep intel_gpu
-intel_gpu_abrt
-intel_gpu_frequency
-intel_gpu_time
-intel_gpu_top
 
 
 
@@ -164,7 +162,8 @@ Personalmente no lo voy ha instalar que de recursos andamos limitados.
 
 
 # Daemon para monitorear y controlar la temperatura del sistema.
-paru -S thermald
+no instalo por conflicto con amd ver amdInstall.sh
+# paru -S thermald
 
 
 Instalamos antimicrox
@@ -175,6 +174,158 @@ paru -S antimicrox
 configurar desde el repositorio dotfiles
 
 
+
+
+
+/////////////////////////////
+LAUNCHES
+/////////////////////////////
+
+
+
+
+
+Instalacion de steam
+sudo pacman -S steam
+
+Primero configurar
+Steam -> Parámetros -> Almacenamiento ->
+
+Para optimizar con gamemode
+administrar -> Propiedades -> Parámetros de lanzamiento ->
+gamemoderun %command%
+o
+
+gamemoderun MANGOHUD=1 %command%
+
+
+
+
+
+Instalacion de Heroic Games
+
+paru -Syu
+paru -S wine-staging
+paru -S winetricks
+
+winecfg
+winetricks -q dxvk
+
+paru -S heroic-games-launcher-git
+
+los juegos se pueden configurar con:
+Habilitar Mangohud
+Usar GameMode
+
+
+
+si un juego de GOG, Amazon o Epic,
+por ejm. uno no se escuchava, prueba con
+Steam:
+Dejalo instalado en Heroic y ejecuta
+como aplicacion no de steam y elije
+forzar con protón, tambien puedes usar
+Configuración de steam
+en parametros de lanzamiento:
+gamemoderun %command%
+
+
+
+
+
+
+Instalación de lutris
+paru -S lutris
+
+
+Configuración de lutris:
+por configurar aun:
+Luego buscar por enviroment variables y colocar lo siguiente:
+Key:
+__GL_SHADER_DISK_CACHE_SKIP_CLEANUP
+Value
+1
+En command prefix colocar:
+gamemoderun DXVK_HUD=60
+
+
+
+
+
+
+Instalación de MINECRAFT
+
+Para poder añadir un usuario sin cuenta premium:
+https://github.com/antunnitraj/Prism-Launcher-PolyMC-Offline-Bypass
+
+al ejecutar saldra una ventanita de configuracion, cuando configure la ram
+añadirle la mayor memoria posible sin dejar el sistema sin memoria
+lo aconsejable son unos 6 GB
+
+ya en la aplicacion
+añadir instancia seleccionamos la version del minecraft y
+el mod loader Fabric
+
+pulsamos launch para que se descarge y se instale
+lo cerramos
+y pulsamos editar -> mods -> instalar mods
+
+Fabric API
+Sodium
+
+y si se quiere shaders
+Iris shaders
+
+
+pulsamos editar -> mods -> shaders packs
+Complementary Shaders Reimagined
+
+pulsamos editar -> mods -> resources packs -> abrir
+
+descargamos igual le podemos decir que lo descarge
+https://github.com/Poudingue/Vanilla-Normals-Renewed/releases/download/1.0.7/VNR-1.0.7.zip
+y selecionamos este archivo descargado
+
+opciones --> resurdes pack
+añadimos el VNR aunque nos diga incompatible
+
+opciones -> vcideo setting -> shaders pack
+selecciona
+ComplementaryReimagined_r5.1.1.zip
+Shade pack setting
+
+Creamos el archivo de configuracion de la textura:
+ComplementaryReimagined_r5.1.1.zip.txt
+
+Y añadimos:
+#Thu Dec 21 10:26:19 ART 2023
+LENSFLARE_I=0.20
+ATM_FOG_MULT=0.50
+FXAA=false
+ANISOTROPIC_FILTER=4
+WATER_STYLE_DEFINE=2
+RP_MODE=3
+LENSFLARE=true
+POM_DEPTH=0.25
+POM_DISTANCE=16
+BLOOM_STRENGTH=0.054
+POM_QUALITY=16
+
+en la aplicacion Shade pack setting
+importar y seleccionamos el archivo
+
+
+
+
+
+Resoluciones 16:9
+
+2560x1440 (actual)
+1920x1080
+1600x900
+1280x720
+854x480
+640x360
 
 
 
