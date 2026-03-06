@@ -643,11 +643,11 @@ oficiales
       "                   "
       " -P /usr/local/bin "
       "                   "
-# wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/paruInstallConf.sh
+$ sudo wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/paruInstallConf.sh
 Verificar:
-# nano /usr/local/bin/paruInstallConf.sh
-# chmod +x /usr/local/bin/paruInstallConf.sh
-# sh /usr/local/bin/paruInstallConf.sh
+$ sudo nano /usr/local/bin/paruInstallConf.sh
+$ sudo chmod +x /usr/local/bin/paruInstallConf.sh
+$ sudo sh /usr/local/bin/paruInstallConf.sh
 
 
 
@@ -701,11 +701,11 @@ $ sudo sh ./installAMD.sh
 
 
 Instalando los servicios de bluetooth
-# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/btInstall.sh
+$ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/btInstall.sh
 Verificar:
-# nano btInstall.sh
-# chmod +x btInstall.sh
-# ./btInstall.sh
+$ nano btInstall.sh
+$ chmod +x btInstall.sh
+$ sudo sh ./btInstall.sh
 
 verificar:
 # systemctl status bluetooth.service
@@ -724,11 +724,15 @@ https://wiki.archlinux.org/title/Bluetooth_headset
 
 VERIFICAR las configuraciones de usuario
 Instalamos el servidor de AUDIO pipewire
-# wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/soundServer.sh
+!!! Cuidado descargar y ejecutar en /usr/local/bin: ¡¡¡
+           "                   "
+           " -P /usr/local/bin "
+           "                   "
+$ sudo wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/soundServer.sh
 Verificar:
-# nano /usr/local/bin/soundServer.sh
-# chmod +x /usr/local/bin/soundServer.sh
-# sh /usr/local/bin/soundServer.sh
+$ sudo nano /usr/local/bin/soundServer.sh
+$ sudo chmod +x /usr/local/bin/soundServer.sh
+$ sudo sh /usr/local/bin/soundServer.sh
 
 
 
