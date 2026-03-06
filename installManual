@@ -575,6 +575,9 @@ conectamos a internet
 $ ping -c 3 archlinux.com
 
 
+Volvemos a la carpeta temp
+
+$ cd /tmp
 
 
 
@@ -612,13 +615,13 @@ $ journalctl -b | grep cryptsetup
 
 
 configuramos pacman y añadimos los repositorios
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/pacmanConf.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/pacmanConf.sh
 Verificar:
 # nano pacmanConf.sh
 # chmod +x pacmanConf.sh
 # ./pacmanConf.sh
 
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/pacmanRepo.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/pacmanRepo.sh
 Verificar:
 # nano pacmanRepo.sh
 # chmod +x pacmanRepo.sh
@@ -640,7 +643,7 @@ oficiales
       "                   "
       " -P /usr/local/bin "
       "                   "
-# wget -P /usr/local/bin https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/paruInstallConf.sh
+# wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/paruInstallConf.sh
 Verificar:
 # nano /usr/local/bin/paruInstallConf.sh
 # chmod +x /usr/local/bin/paruInstallConf.sh
@@ -660,7 +663,7 @@ Verificar:
 
 
 ================================= para intel ===================================================
-$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/install_i9.sh
+$ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/install_i9.sh
 Verificar:
 # nano install_i9.sh
 chmod +x install_i9.sh
@@ -669,7 +672,7 @@ chmod +x install_i9.sh
 
 
 ================================= para AMD  ===================================================
-$ wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/installAMD.sh
+$ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/installAMD.sh
 Verificar:
 # nano installAMD.sh
 chmod +x installAMD.sh
@@ -707,7 +710,7 @@ install "xf86-video-amdgpu
 
 
 Instalando los servicios de bluetooth
-# wget https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/btInstall.sh
+# wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/btInstall.sh
 Verificar:
 # nano btInstall.sh
 # chmod +x btInstall.sh
@@ -730,7 +733,7 @@ https://wiki.archlinux.org/title/Bluetooth_headset
 
 VERIFICAR las configuraciones de usuario
 Instalamos el servidor de AUDIO pipewire
-# wget -P /usr/local/bin https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/soundServer.sh
+# wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/soundServer.sh
 Verificar:
 # nano /usr/local/bin/soundServer.sh
 # chmod +x /usr/local/bin/soundServer.sh
@@ -820,7 +823,7 @@ fc-cache -fv
 
 instalamos kitty
 
-# wget -P /usr/local/bin https://raw.githubusercontent.com/c2mismo/archLinux/refs/heads/main/scripts/kittyInstall.sh
+# wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/kittyInstall.sh
 Verificar:
 # nano /usr/local/bin/kittyInstall.sh
 # chmod +x /usr/local/bin/kittyInstall.sh
