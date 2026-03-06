@@ -964,9 +964,16 @@ paru -Sy
 # Función para instalar paquetes
 install() {
     local option="$1"
-    if ! paru -Qi "$option" > /dev/null 2>&1; then
-        paru -S --noconfirm "$option"
+    if ! pacman -Qi "$option" > /dev/null 2>&1; then
+        pacman -S --noconfirm "$option"
     fi
+}
+
+
+# Función para instalar paquetes
+install() {
+    local option="$1"
+    paru -S --noconfirm --needed "$option"
 }
 
 
@@ -977,18 +984,6 @@ install() {
 
 
 
-
-
-Smartmontools es un conjunto de herramientas que permite monitorear y gestionar
-el estado de los discos duros y unidades de estado sólido (SSD) utilizando
-la tecnología S.M.A.R.T. (Self-Monitoring, Analysis, and Reporting Technology)
-smartmontools
-usos
-sudo smartctl -a /dev/sda
-sudo smartctl -t short /dev/sda
-sudo smartctl -t long /dev/sda
-sudo systemctl enable smartd
-sudo systemctl start smartd
 
 
 
