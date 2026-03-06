@@ -12,8 +12,8 @@ pacman -Sy
 # Instalación de drivers y herramientas para AMD
 install() {
     local option="$1"
-    if ! pacman -Qi $option > /dev/null 2>&1; then
-      sudo pacman -S --noconfirm $option
+    if ! paru -Qi $option > /dev/null 2>&1; then
+      paru -S $option
     fi
 }
 
@@ -27,9 +27,13 @@ install "cpupower"
 # GPU
 
 install "mesa"
+install "lib32-mesa"
 install "vulkan-radeon"
+install "lib32-vulkan-radeon"
 install "vulkan-tools"
 install "vulkan-icd-loader"
+install "lib32-vulkan-icd-loader"
+install "xf86-video-amdgpu
 
 herramiente par monitorizar sensores
 install "zenmonitor"
@@ -43,21 +47,21 @@ install "radeon-profile"
 
 
 # Verificar y habilitar thermald.service
-if systemctl --user is-active --quiet thermald.service > /dev/null 2>&1; then
-    echo "thermald.service ya está activo."
-else
-    echo "thermald.service no está activo. Procediendo a habilitar e iniciar..."
-    systemctl --user enable thermald.service > /dev/null 2>&1
-    echo "thermald.service ha sido habilitado."
-fi
+# if systemctl --user is-active --quiet thermald.service > /dev/null 2>&1; then
+#    echo "thermald.service ya está activo."
+# else
+#    echo "thermald.service no está activo. Procediendo a habilitar e iniciar..."
+#    systemctl --user enable thermald.service > /dev/null 2>&1
+#    echo "thermald.service ha sido habilitado."
+# fi
 
 # Configuración para Xorg, para Wayland no realizar
 # install "xorg-server"
 # install "xorg-xinit"
 
 # Creamos una configuración para el manejo gráfico en Xorg
-CONFIG_FILE="/etc/X11/xorg.conf.d/20-amd.conf"
-CONFIG_DIR="/etc/X11/xorg.conf.d"
+# CONFIG_FILE="/etc/X11/xorg.conf.d/20-amd.conf"
+# CONFIG_DIR="/etc/X11/xorg.conf.d"
 
 # Función para crear el archivo de configuración
 crear_configuracion() {
