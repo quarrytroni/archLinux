@@ -761,10 +761,10 @@ Desabilitamos la hibernación necesario si queremos tener instalados mas de un S
 $ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/disable-sleep.sh
 Verificar:
 $ nano disable-sleep.sh
-$ sudo chmod +x disable-sleep.sh
+$ chmod +x disable-sleep.sh
 $ sudo sh ./disable-sleep.sh
 
-# systemctl enable sddm
+$ sudo systemctl enable sddm
 
 
 Tema SDDM:
@@ -818,14 +818,14 @@ fc-cache -fv
 
 instalamos kitty
 
-# wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/kittyInstall.sh
+$ sudo wget -P /usr/local/bin https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/kittyInstall.sh
 Verificar:
-# nano /usr/local/bin/kittyInstall.sh
-# chmod +x /usr/local/bin/kittyInstall.sh
-# sh /usr/local/bin/kittyInstall.sh
+$ sudo nano /usr/local/bin/kittyInstall.sh
+$ sudo chmod +x /usr/local/bin/kittyInstall.sh
+$ sudo sh /usr/local/bin/kittyInstall.sh
 
 Configurar Nerd Fonts en tu terminal (kitty)
-fc-list | grep -i "nerd"
+$ fc-list | grep -i "nerd"
 
 
 nano ~/.config/kitty/kitty.conf
@@ -875,10 +875,10 @@ kde-applications-meta kde-network-meta kde-utilities-meta
 nos aseguramos que el sistema no haga hibernación
 
 deshabilitar la hibernacion:
-# cp /etc/systemd/logind.conf /etc/systemd/logind.conf.backup
+$ sudo cp /etc/systemd/logind.conf /etc/systemd/logind.conf.backup
 
 
-sudo nano /etc/systemd/logind.conf
+$ sudo nano /etc/systemd/logind.conf
 
 #HandlePowerKey=ignore
 por
