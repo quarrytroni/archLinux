@@ -33,13 +33,13 @@ install "lib32-vulkan-radeon"
 install "vulkan-tools"
 install "vulkan-icd-loader"
 install "lib32-vulkan-icd-loader"
-install "xf86-video-amdgpu
+install "xf86-video-amdgpu"
 
 herramiente par monitorizar sensores
-install "zenmonitor"
+install "zenmonitor3"
 
 # Para monitorear el rendimiento de tu GPU AMD en Wayland
-install "radeon-profile"
+install "radeon-profile-git"
 
 # thermald: herramienta es específica y casi exclusiva para CPUs Intel.
 # Daemon para monitorear y controlar la temperatura del sistema.
