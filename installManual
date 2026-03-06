@@ -665,18 +665,18 @@ Verificar:
 ================================= para intel ===================================================
 $ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/install_i9.sh
 Verificar:
-# nano install_i9.sh
-chmod +x install_i9.sh
-./install_i9.sh
+$ nano install_i9.sh
+$ chmod +x install_i9.sh
+$ sudo sh ./install_i9.sh
 ==============================================================================================
 
 
 ================================= para AMD  ===================================================
 $ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/installAMD.sh
 Verificar:
-# nano installAMD.sh
-chmod +x installAMD.sh
-./installAMD.sh
+$ nano installAMD.sh
+$ chmod +x installAMD.sh
+$ sudo sh ./installAMD.sh
 ===============================================================================================
 
 
