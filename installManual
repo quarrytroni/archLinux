@@ -731,7 +731,11 @@ $ sudo pacman -U https://archive.archlinux.org/packages/b/bluez-utils/bluez-util
 
 $ sudo systemctl enable bluetooth.service
 
+========================================================================================================
 
+========================downgrade en el sistema instalado a version anterior y ignore del upgrade =========
+ mirar el repositorio en :
+https://github.com/quarrytroni/documentos/blob/main/informatica/machines/arcHeart/config_Base_Sistem/solucion_downgrade_A2DP_bluetooth
 
 
 
