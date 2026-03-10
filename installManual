@@ -709,7 +709,7 @@ $ sudo sh ./installAMD.sh
 
 
 
-
+======no ejecutamos el por problema de connectividad A2DP con bluez 5.86=========
 Instalando los servicios de bluetooth
 $ wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/btInstall.sh
 Verificar:
@@ -722,11 +722,7 @@ verificar:
 
 En la última instalación no se "enable" correctamente.
 
-
-no intsalla correctamente los codec:
-SBC/SBC-XQ, AptX
-info:
-https://wiki.archlinux.org/title/Bluetooth_headset
+========================instalamos version anterior y ignore del upgrade================================
 
 
 
@@ -764,7 +760,7 @@ GESTORES DE VENTANAS KDE
 
 kde mínimo pero plasma completo para mayor integridad y minimo un terminal y un explorador de archivos
 
-$ paru -S plasma kde-system kde-accessibility kwalletmanager kdialog dolphin-plugins kcalc kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
+$ paru -S plasma kde-system kde-accessibility kwalletmanager kdialog bluedevil dolphin-plugins kcalc kcalutils ark kate kcharselect lximage-qt okular kgpg kdeconnect kdenetwork-filesharing
 
 Desabilitamos la hibernación necesario si queremos tener instalados mas de un SOs
 
