@@ -624,12 +624,11 @@ Verificar:
 ====== verificar en futuro si arreglan el problema y eliminar ese ignore ==================================
 por problemas de conexion bluetooh y gestion codec audio vamos a downgrade bluez y bluez-utils y añadimos regla
 de ignore a esos dos paquetes
+
 $ sudo nano /etc/pacman.conf 
 # IgnorePkg =
 IgnorePkg = bluez bluez-utils
 
-https://archive.archlinux.org/packages/b/bluez/bluez-5.72-1-x86_64.pkg.tar.zst
-https://archive.archlinux.org/packages/b/bluez-utils/bluez-utils-5.72-1-x86_64.pkg.tar.zst
 
 # wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/pacmanRepo.sh
 Verificar:
@@ -723,6 +722,17 @@ verificar:
 En la última instalación no se "enable" correctamente.
 
 ========================instalamos version anterior y ignore del upgrade================================
+
+he ejecutado el script sin instalar el paquete y sin activar bluetooth.service
+
+instalo la versione anteriore 
+$ sudo pacman -U https://archive.archlinux.org/packages/b/bluez/bluez-5.72-1-x86_64.pkg.tar.zst
+$ sudo pacman -U https://archive.archlinux.org/packages/b/bluez-utils/bluez-utils-5.72-1-x86_64.pkg.tar.zst
+
+$ sudo systemctl enable bluetooth.service
+
+
+
 
 
 
