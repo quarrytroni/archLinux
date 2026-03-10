@@ -621,6 +621,12 @@ Verificar:
 # chmod +x pacmanConf.sh
 # ./pacmanConf.sh
 
+por problemas de conexion bluetooh y gestion codec audio vamos a downgrade bluez y bluez-utils y añadimos regla
+de ignore a esos dos paquetes
+$ sudo nano /etc/pacman.conf 
+# IgnorePkg =
+IgnorePkg = bluez bluez-utils
+
 # wget https://raw.githubusercontent.com/quarrytroni/archLinux/refs/heads/main/scripts/pacmanRepo.sh
 Verificar:
 # nano pacmanRepo.sh
