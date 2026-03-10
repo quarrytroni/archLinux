@@ -621,6 +621,7 @@ Verificar:
 # chmod +x pacmanConf.sh
 # ./pacmanConf.sh
 
+====== verificar en futuro si arreglan el problema y eliminar ese ignore ==================================
 por problemas de conexion bluetooh y gestion codec audio vamos a downgrade bluez y bluez-utils y añadimos regla
 de ignore a esos dos paquetes
 $ sudo nano /etc/pacman.conf 
