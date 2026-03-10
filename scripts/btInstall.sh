@@ -23,17 +23,6 @@ install "bluez"
 
 install "bluez-utils"
 
-install "bluedevil"
-
-# Verificar y habilitar bluetooth.service
-if systemctl --user is-active --quiet bluetooth.service > /dev/null 2>&1; then
-    echo "bluetooth.service ya está activo."
-else
-    echo "bluetooth.service no está activo.\nProcediendo a habilitar e iniciar..."
-    systemctl --user enable bluetooth.service > /dev/null 2>&1
-    echo "bluetooth.service ha sido habilitado."
-fi
-
 echo "Configurando BlueZ para soporte A2DP..."
 
 # Crear backup del archivo original
@@ -46,6 +35,17 @@ sudo sed -i 's/^FastConnectable = false/FastConnectable = true/' "$CONFIG_FILE"
 
 # Descomentar AutoEnable=true
 sudo sed -i 's/^#AutoEnable=true/AutoEnable=true/' "$CONFIG_FILE"
+
+# Verificar y habilitar bluetooth.service
+if systemctl --user is-active --quiet bluetooth.service > /dev/null 2>&1; then
+    echo "bluetooth.service ya está activo."
+else
+    echo "bluetooth.service no está activo.\nProcediendo a habilitar e iniciar..."
+    systemctl --user enable bluetooth.service > /dev/null 2>&1
+    echo "bluetooth.service ha sido habilitado."
+fi
+
+
 
 
 echo "Configuracion del bluetooth terminada."
