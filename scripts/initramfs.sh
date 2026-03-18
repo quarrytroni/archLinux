@@ -22,7 +22,9 @@ HOOKS_MODULES_COMMENT="#    HOOKS=(base systemd autodetect microcode modconf kms
 
 # Línea para descomentar y modificar para systemd original
 HOOKS_MODULES_ORI_COMMENT="#    HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)"
-HOOKS_MODULES_UNCOMMENT_MOD="HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole sd-encrypt block filesystems fsck)"
+HOOKS_MODULES_UNCOMMENT_MOD="HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)"
+
+# HOOK keymap entra en conflicto con sd-vconsole
 
 # Hacer una copia de seguridad del archivo de configuración
 cp "$MKINITCPIO_CONF" "$BACKUP_CONF"
@@ -75,7 +77,7 @@ if [ $flag -eq 1 ]; then
   # Mostramos las líneas modificadas
   grep '^MODULES=' "$MKINITCPIO_CONF"
   grep '^HOOKS=' "$MKINITCPIO_CONF"
-  
+
   # Verificar si la línea de HOOKS ha devuelto una salida
   if grep -q '^HOOKS=' "$MKINITCPIO_CONF"; then
     # Regenerar la imagen del initramfs
