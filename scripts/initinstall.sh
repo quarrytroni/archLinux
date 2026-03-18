@@ -5,8 +5,7 @@
 # exfat-utils es obsoleto, usar exfatprogs
 
 # Para AMD
-pacstrap -iK /mnt base base-devel fuse linux-zen linux-zen-headers linux-firmware amd-ucode arch-install-scripts usbutils nano less git btrfs-progs exfatprogs ntfs-3g grub efibootmgr networkmanager wget openssh
-
+pacstrap -iK /mnt base base-devel fuse linux-zen linux-zen-headers linux-firmware amd-ucode arch-install-scripts usbutils nano less git btrfs-progs exfatprogs ntfs-3g grub efibootmgr networkmanager wget openssh time
 
 # Limpiar los archivos temporales
 sudo rm -f "$0"

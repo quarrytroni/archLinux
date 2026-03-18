@@ -35,8 +35,11 @@ install "vulkan-icd-loader"
 install "lib32-vulkan-icd-loader"
 install "xf86-video-amdgpu"
 
-herramiente par monitorizar sensores
-install "zenmonitor3"
+# ROCm (Radeon Open Compute) incluye controladores, herramientas, librerías y APIs para programar GPUs equivalente a CUDA de NVIDIA
+install "rocm-opencl-runtime"
+
+# herramiente par monitorizar sensores
+# install "zenmonitor3"
 
 # Para monitorear el rendimiento de tu GPU AMD en Wayland
 install "radeon-profile-git"
@@ -80,7 +83,7 @@ EOF
 # Verificar si el archivo de configuración existe
 if [ -f "$CONFIG_FILE" ]; then
     echo "El archivo $CONFIG_FILE ya existe."
-    
+
     # Verificar si el archivo contiene la palabra "amdgpu"
     if ! grep -q "amdgpu" "$CONFIG_FILE"; then
         echo "El archivo no contiene la palabra 'amdgpu'. Se sobrescribirá el archivo."
