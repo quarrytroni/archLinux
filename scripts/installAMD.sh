@@ -30,7 +30,6 @@ install "mesa"
 install "lib32-mesa"
 install "vulkan-radeon"
 install "lib32-vulkan-radeon"
-install "vulkan-tools"
 install "vulkan-icd-loader"
 install "lib32-vulkan-icd-loader"
 install "xf86-video-amdgpu"
@@ -38,11 +37,14 @@ install "xf86-video-amdgpu"
 # ROCm (Radeon Open Compute) incluye controladores, herramientas, librerías y APIs para programar GPUs equivalente a CUDA de NVIDIA
 install "rocm-opencl-runtime"
 
-# herramiente par monitorizar sensores
+# herramiente par monitorizar sensores tiene problemas con AMD, instalar la siguiente.
 # install "zenmonitor3"
 
 # Para monitorear el rendimiento de tu GPU AMD en Wayland
 install "radeon-profile-git"
+
+# No necesario, es para developement
+# install "vulkan-tools"
 
 # thermald: herramienta es específica y casi exclusiva para CPUs Intel.
 # Daemon para monitorear y controlar la temperatura del sistema.
@@ -67,18 +69,21 @@ install "radeon-profile-git"
 # CONFIG_DIR="/etc/X11/xorg.conf.d"
 
 # Función para crear el archivo de configuración
-crear_configuracion() {
-    cat > "$CONFIG_FILE" << EOF
-Section "Device"
-    Identifier  "AMD Graphics"
-    Driver      "amdgpu"
 
-    # Opciones para mejorar la experiencia visual
-    Option      "TearFree"     "true"  # Elimina el desgarro de la pantalla
-    Option      "TripleBuffer"  "true"  # Mejora la fluidez en la reproducción de video y juegos
-EndSection
-EOF
-}
+# crear_configuracion() {
+#     cat > "$CONFIG_FILE" << EOF
+# Section "Device"
+#     Identifier  "AMD Graphics"
+#     Driver      "amdgpu"
+#
+#     # Opciones para mejorar la experiencia visual
+#     Option      "TearFree"     "true"  # Elimina el desgarro de la pantalla
+#     Option      "TripleBuffer"  "true"  # Mejora la fluidez en la reproducción de video # y juegos
+# EndSection
+# EOF
+# }
+
+
 
 # Verificar si el archivo de configuración existe
 if [ -f "$CONFIG_FILE" ]; then
